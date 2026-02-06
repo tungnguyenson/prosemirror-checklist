@@ -1,0 +1,36 @@
+{
+    "name": "prosemirror-checklist",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Checklist (Task Item) support for ProseMirror",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "prepublish": "npm run build"
+    },
+    "keywords": [
+        "prosemirror",
+        "checklist",
+        "task",
+        "editor"
+    ],
+    "author": "Tung Nguyen Son",
+    "license": "MIT",
+    "peerDependencies": {
+        "prosemirror-state": "^1.0.0",
+        "prosemirror-model": "^1.0.0",
+        "prosemirror-view": "^1.0.0",
+        "prosemirror-commands": "^1.0.0",
+        "prosemirror-schema-list": "^1.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "prosemirror-state": "^1.4.3",
+        "prosemirror-model": "^1.19.3",
+        "prosemirror-view": "^1.32.4",
+        "prosemirror-commands": "^1.5.2",
+        "prosemirror-inputrules": "^1.2.1",
+        "prosemirror-keymap": "^1.2.2"
+    }
+}
