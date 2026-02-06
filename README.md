@@ -58,17 +58,24 @@ const state = EditorState.create({
 });
 ```
 
-### 3. Commands
+### 3. Menu Integration
 
-Use `wrapInCheckList` to create the command for your menu or keymap.
+To make the checklist usable, you should add a menu item using `prosemirror-menu` or a similar UI interaction.
 
 ```typescript
 import { wrapInCheckList } from "prosemirror-checklist";
+import { MenuItem } from "prosemirror-menu";
 
-// In your menu configuration
-run: (state, dispatch, view) => {
-    return wrapInCheckList(mySchema.nodes.checkList)(state, dispatch, view);
-}
+const checklistItem = new MenuItem({
+    title: "Insert Checklist",
+    label: "Checklist",
+    icon: { text: "☑️", css: "font-size: 16px; vertical-align: middle;" },
+    enable: () => true,
+    run: (state, dispatch, view) => {
+        const { checkList } = mySchema.nodes;
+        return wrapInCheckList(checkList)(state, dispatch, view);
+    }
+});
 ```
 
 ## Attribution
