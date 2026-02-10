@@ -6,7 +6,7 @@ import { toggleChecked } from "./commands.js";
 
 export function buildKeymap(itemType: NodeType) {
     const keys: Record<string, Command> = {
-        "Enter": splitListItem(itemType),
+        "Enter": checkItemEnter(itemType),
         "Tab": sinkListItem(itemType),
         "Shift-Tab": liftListItem(itemType),
         "Mod-Shift-Enter": toggleChecked
@@ -15,11 +15,6 @@ export function buildKeymap(itemType: NodeType) {
     return keymap(keys);
 }
 
-/**
- * Custom Enter behavior for check items
- * - If item is empty, lift it (convert to paragraph)
- * - Otherwise, create new unchecked item
- */
 export function checkItemEnter(itemType: NodeType): Command {
     return (state, dispatch) => {
         const { $from, $to } = state.selection;
@@ -28,12 +23,12 @@ export function checkItemEnter(itemType: NodeType): Command {
         const listItem = $from.node(-1);
         if (listItem.type !== itemType) return false;
 
-        if ($from.parent.content.size === 0) {
-            // Empty paragraph inside check item -> lift
+        // If at the end of an empty item, lift it
+        if ($from.parent.content.size === 0 && listItem.childCount === 1) {
             return liftListItem(itemType)(state, dispatch);
         }
 
         // Split list item, ensuring new item is unchecked
-        return splitListItem(itemType)(state, dispatch);
+        return splitListItem(itemType, { checked: false })(state, dispatch);
     };
 }

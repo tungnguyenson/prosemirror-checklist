@@ -14,10 +14,11 @@ export class CheckItemView implements NodeView {
         this.dom = document.createElement("li");
         this.dom.setAttribute("data-check-item", "");
         this.dom.setAttribute("data-checked", node.attrs.checked ? "true" : "false");
+        this.dom.className = "prosemirror-check-item";
 
         this.checkbox = document.createElement("input");
         this.checkbox.type = "checkbox";
-        this.checkbox.className = "check-checkbox";
+        this.checkbox.className = "prosemirror-check-item-checkbox";
         this.checkbox.checked = node.attrs.checked;
         this.checkbox.addEventListener("change", (e) => {
             const pos = this.getPos();
@@ -39,7 +40,7 @@ export class CheckItemView implements NodeView {
         this.dom.appendChild(this.checkbox);
 
         const contentContainer = document.createElement("div");
-        contentContainer.className = "check-content";
+        contentContainer.className = "prosemirror-check-item-content";
         this.dom.appendChild(contentContainer);
         this.contentDOM = contentContainer;
     }

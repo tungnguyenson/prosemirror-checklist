@@ -4,7 +4,7 @@ export const checkList: NodeSpec = {
     group: "block",
     content: "checkItem+",
     parseDOM: [{ tag: 'ul[data-check-list]' }],
-    toDOM: () => ['ul', { 'data-check-list': '' }, 0]
+    toDOM: () => ['ul', { 'data-check-list': '', class: 'prosemirror-checklist' }, 0]
 };
 
 export const checkItem: NodeSpec = {
@@ -22,6 +22,7 @@ export const checkItem: NodeSpec = {
     }],
     toDOM: node => ['li', {
         'data-check-item': '',
-        'data-checked': node.attrs.checked ? 'true' : 'false'
+        'data-checked': node.attrs.checked ? 'true' : 'false',
+        class: 'prosemirror-check-item'
     }, 0]
 };
